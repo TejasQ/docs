@@ -5,8 +5,9 @@ const H4 = ({ children, isCommand }) => (
     {children}
     <style jsx>{`
       h4 {
-        font-weight: normal;
+        font-weight: 600;
         font-size: 24px;
+        margin-bottom: 16px;
       }
 
       .command {

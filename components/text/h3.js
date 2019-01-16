@@ -3,7 +3,7 @@ const H3 = ({ children }) => (
     {children}
     <style jsx>{`
       h3 {
-        font-weight: normal;
+        font-weight: 500;
         font-size: 28px;
         margin-top: 42px;
       }

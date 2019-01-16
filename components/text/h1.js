@@ -4,7 +4,7 @@ const H1 = ({ children }) => (
     <style jsx>{`
       h1 {
         font-size: 36px;
-        font-weight: 400;
+        font-weight: 600;
         margin-top: 0;
         line-height: 1.333;
       }

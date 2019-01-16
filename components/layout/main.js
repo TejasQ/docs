@@ -1,7 +1,7 @@
 import Wrapper from './wrapper'
 
 const Main = ({ children }) => (
-  <div className="main">
+  <main className="main">
     <Wrapper>{children}</Wrapper>
     <style jsx>{`
       .main {
@@ -14,7 +14,7 @@ const Main = ({ children }) => (
         min-height: calc(100vh - 90px);
       }
     `}</style>
-  </div>
+  </main>
 )
 
 export default Main

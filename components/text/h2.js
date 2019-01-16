@@ -4,7 +4,7 @@ const H2 = ({ children }) => (
     <style jsx>{`
       h2 {
         font-size: 32px;
-        font-weight: normal;
+        font-weight: 500;
         margin-top: 32px;
         line-height: 1.5;
       }

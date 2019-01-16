@@ -29,6 +29,7 @@
     "content-type": "1.0.4",
     "cross-env": "5.2.0",
     "date-fns": "1.29.0",
+    "dateformat": "3.0.3",
     "fs-extra": "7.0.1",
     "intersection-observer": "0.5.0",
     "isomorphic-unfetch": "2.0.0",

@@ -4,6 +4,7 @@ import Link from 'next/link'
 import Markdown from 'react-markdown'
 
 import { Code, InlineCode } from '~/components/code'
+import Layout from '~/components/layout/layout'
 import H1 from '~/components/text/h1'
 import H2 from '~/components/text/h2'
 import H3 from '~/components/text/h3'
@@ -27,9 +28,6 @@ import Input from '~/components/input'
 
 import * as bodyLocker from '~/lib/utils/body-locker'
 import Head from '~/components/layout/head'
-import Header from '~/components/layout/header'
-import Main from '~/components/layout/main'
-import Page from '~/components/layout/page'
 import DocsIndex from '~/components/layout/index'
 import Content from '~/components/layout/content'
 import Sidebar from '~/components/layout/sidebar'
@@ -37,8 +35,6 @@ import Select from '~/components/select'
 import ToggleGroup, { ToggleItem } from '~/components/toggle-group'
 import withError from '~/components/layout/error'
 import EXAMPLES from '~/lib/data/now-examples-docs'
-import { UserContext } from '~/lib/user-context'
-import UseTeamInfo from '~/lib/use-team-info'
 
 const CodeMarkdown = ({ language, value }) => (
   <Code lang={language}>{value}</Code>
@@ -116,20 +112,6 @@ class ExamplesPage extends React.Component {
     this.setState({ sidebar: wrapSidebar(filteredList) })
   }
 
-  handleToggleNavigation = () => {
-    this.setState(({ navigationActive }) => {
-      if (navigationActive) {
-        bodyLocker.unlock()
-      } else {
-        bodyLocker.lock()
-      }
-
-      return {
-        navigationActive: !navigationActive
-      }
-    })
-  }
-
   handleIndexClick = () => {
     if (this.state.navigationActive) {
       bodyLocker.unlock()
@@ -152,7 +134,7 @@ class ExamplesPage extends React.Component {
     }
 
     return (
-      <Page>
+      <Layout>
         <Head
           description="A comprehensive guide to using the Now API and gaining control over the Now platform"
           title={`Now by Example${title}`}
@@ -160,100 +142,83 @@ class ExamplesPage extends React.Component {
           titleSuffix=" - ZEIT"
         />
 
-        <UserContext.Consumer>
-          {({ user, userLoaded }) => (
-            <UseTeamInfo
-              user={user}
-              render={({ teams }) => (
-                <Header
-                  onToggleNavigation={this.handleToggleNavigation}
-                  user={user}
-                  teams={teams}
-                  userLoaded={userLoaded}
-                />
-              )}
-            />
-          )}
-        </UserContext.Consumer>
-
-        <Main>
-          <Sidebar active={navigationActive} innerRef={this.handleSidebarRef}>
-            <div className="toggle-group-wrapper">
-              <ToggleGroup>
-                <ToggleItem
-                  active={
-                    router.pathname.startsWith('/docs') &&
-                    !router.pathname.startsWith('/docs/api')
-                  }
-                >
-                  <Link prefetch href="/docs">
-                    <a onClick={this.handleIndexClick}>Docs</a>
-                  </Link>
-                </ToggleItem>
-                <ToggleItem active={router.pathname.startsWith('/docs/api')}>
-                  <Link prefetch href="/docs/api">
-                    <a onClick={this.handleIndexClick}>API Reference</a>
-                  </Link>
-                </ToggleItem>
-                <ToggleItem active={router.pathname.startsWith('/examples')}>
-                  <Link prefetch href="/examples">
-                    <a onClick={this.handleIndexClick}>Examples</a>
-                  </Link>
-                </ToggleItem>
-              </ToggleGroup>
-            </div>
-            <h5 className="platform-select-title">Now Platform Version</h5>
-            <Select defaultValue="v2" disabled={true} width="100%">
-              <option value="v1">v1</option>
-              <option value="v2">v2 (Latest)</option>
-            </Select>
-            <div className="search-bar">
-              <Input
-                className="search-input"
-                rightIcon={<SearchIcon />}
-                placeholder="Search for examples"
-                onChange={this.filterSidebar}
-              />
-            </div>
-            <DocsIndex
-              activeItem={active}
-              getHref={slugs => {
-                return {
-                  href: `/examples/${slugs.section}`,
-                  as: `/examples/${slugs.section}`
+        <Sidebar active={navigationActive} innerRef={this.handleSidebarRef}>
+          <div className="toggle-group-wrapper">
+            <ToggleGroup>
+              <ToggleItem
+                active={
+                  router.pathname.startsWith('/docs') &&
+                  !router.pathname.startsWith('/docs/api')
                 }
-              }}
-              onSectionActive={() => {}}
-              onClickLink={this.handleIndexClick}
-              structure={sidebar}
-              setInitiallyActive={() => {}}
-              updateActive={() => {}}
+              >
+                <Link prefetch href="/docs">
+                  <a onClick={this.handleIndexClick}>Docs</a>
+                </Link>
+              </ToggleItem>
+              <ToggleItem active={router.pathname.startsWith('/docs/api')}>
+                <Link prefetch href="/docs/api">
+                  <a onClick={this.handleIndexClick}>API Reference</a>
+                </Link>
+              </ToggleItem>
+              <ToggleItem active={router.pathname.startsWith('/examples')}>
+                <Link prefetch href="/examples">
+                  <a onClick={this.handleIndexClick}>Examples</a>
+                </Link>
+              </ToggleItem>
+            </ToggleGroup>
+          </div>
+          <h5 className="platform-select-title">Now Platform Version</h5>
+          <Select defaultValue="v2" disabled={true} width="100%">
+            <option value="v1">v1</option>
+            <option value="v2">v2 (Latest)</option>
+          </Select>
+          <div className="search-bar">
+            <Input
+              className="search-input"
+              rightIcon={<SearchIcon />}
+              placeholder="Search for examples"
+              onChange={this.filterSidebar}
             />
-          </Sidebar>
-          <Content>
-            <div className="category-wrapper">
-              <H1>{name}</H1>
-              <div className="buttons">
-                <div className="fork-button">
-                  <IconExternalLink
-                    icon={<ForkIcon />}
-                    href={`https://github.com/zeit/now-examples/tree/master${fork}`}
-                  >
-                    Fork
-                  </IconExternalLink>
-                </div>
-                <LabeledExternalLink
-                  label="Live Demo"
-                  href={demo}
-                  icon={<ExternalLinkIcon />}
+          </div>
+          <DocsIndex
+            activeItem={active}
+            getHref={slugs => {
+              return {
+                href: `/examples/${slugs.section}`,
+                as: `/examples/${slugs.section}`
+              }
+            }}
+            onSectionActive={() => {}}
+            onClickLink={this.handleIndexClick}
+            structure={sidebar}
+            setInitiallyActive={() => {}}
+            updateActive={() => {}}
+          />
+        </Sidebar>
+        <Content>
+          <div className="category-wrapper">
+            <H1>{name}</H1>
+            <div className="buttons">
+              <div className="fork-button">
+                <IconExternalLink
+                  icon={<ForkIcon />}
+                  href={`https://github.com/zeit/now-examples/tree/master${fork}`}
                 >
-                  {demo}
-                </LabeledExternalLink>
+                  Fork
+                </IconExternalLink>
               </div>
-              <Markdown source={content} renderers={mdxComponents} />
+              <LabeledExternalLink
+                label="Live Demo"
+                href={demo}
+                icon={<ExternalLinkIcon />}
+              >
+                {demo}
+              </LabeledExternalLink>
             </div>
-          </Content>
-        </Main>
+            <Markdown source={content} renderers={mdxComponents} />
+          </div>
+        </Content>
+
         <style jsx>{`
           ul {
             list-style: none;
@@ -317,7 +282,7 @@ class ExamplesPage extends React.Component {
             }
           }
         `}</style>
-      </Page>
+      </Layout>
     )
   }
 }

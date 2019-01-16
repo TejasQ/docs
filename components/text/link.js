@@ -8,7 +8,8 @@ export const GenericLink = props => {
   if (
     props.href.startsWith('/docs') ||
     props.href.startsWith('/api') ||
-    props.href.startsWith('/examples')
+    props.href.startsWith('/examples') ||
+    props.href.startsWith('/guides')
   ) {
     return <InternalLink {...props} />
   }

@@ -69,7 +69,7 @@ class Header extends Component {
         ref={handleProviderRef}
         style={{ position: 'relative' }}
       >
-        <Avatar user={user} size={30} />
+        <Avatar user={user} uid={user.uid} hash={user.avatar} size={30} />
         {menu}
         <style jsx>{`
           span {
@@ -81,7 +81,14 @@ class Header extends Component {
     )
   }
 
-  renderTeam = ({ displayName = null, avatar, teamId, teamSlug, username }) => {
+  renderTeam = ({
+    displayName = null,
+    avatar,
+    teamId,
+    teamSlug,
+    username,
+    uid
+  }) => {
     const currentTeam = this.props.team
 
     const slug = teamSlug || username
@@ -104,8 +111,10 @@ class Header extends Component {
               <span className="avatar">
                 <Avatar
                   teamId={teamId}
-                  user={{ username: displayName || slug, avatar }}
+                  username={username}
+                  uid={uid}
                   size={24}
+                  hash={avatar}
                 />
               </span>
               <span className="username">{displayName || slug}</span>
@@ -184,6 +193,12 @@ class Header extends Component {
             Docs
           </NavigationItem>
           <NavigationItem
+            href="/guides"
+            active={router.pathname.startsWith('/guides')}
+          >
+            Guides
+          </NavigationItem>
+          <NavigationItem
             href="/docs/api"
             active={router.pathname.startsWith('/docs/api')}
           >
@@ -223,7 +238,11 @@ class Header extends Component {
                       {user.username ? (
                         <Link href={`/${user.username}`}>
                           <a className="avatar-link">
-                            <Avatar user={user} size={50} />
+                            <Avatar
+                              uid={user.uid}
+                              size={50}
+                              hash={user.avatar}
+                            />
                           </a>
                         </Link>
                       ) : (
