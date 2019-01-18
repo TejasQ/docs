@@ -1,6 +1,5 @@
 import Page from '~/components/layout/page'
 import Header from '~/components/layout/header'
-import Main from '~/components/layout/main'
 import { UserContext } from '~/lib/user-context'
 import UseTeamInfo from '~/lib/use-team-info'
 import * as bodyLocker from '~/lib/utils/body-locker'

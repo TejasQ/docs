@@ -2,7 +2,10 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 export const GenericAvatar = ({ title, src, size }, { darkBg }) => (
-  <span className={darkBg ? 'dark' : ''} style={{ width: size, height: size }}>
+  <span
+    className={`avatar ${darkBg ? 'dark' : ''}`}
+    style={{ width: size, height: size }}
+  >
     <img alt={title} title={title} src={src} />
     <style jsx>
       {`

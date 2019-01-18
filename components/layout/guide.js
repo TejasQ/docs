@@ -1,18 +1,23 @@
 import React from 'react'
 import { MDXProvider } from '@mdx-js/tag'
+import formatDate from 'date-fns/format'
 
-import * as bodyLocker from '~/lib/utils/body-locker'
 import Head from '~/components/layout/head'
 import Layout from '~/components/layout/layout'
 import Wrapper from '~/components/layout/wrapper'
-import Main from '~/components/layout/main'
 import Heading from '~/components/text/linked-heading'
 import components from '~/lib/mdx-components'
 import H1 from '~/components/text/h1'
 import H2 from '~/components/text/h2'
 import H3 from '~/components/text/h3'
 import H4 from '~/components/text/h4'
+import H5 from '~/components/text/h5'
 import { P } from '~/components/text/paragraph'
+import { GenericLink } from '~/components/text/link'
+import { Avatar, AvatarGroup } from '~/components/avatar'
+import HR from '~/components/text/hr'
+import Stars from '~/components/stars'
+import FeedbackInput from '~/components/feedback-input'
 
 const DocH2 = ({ children }) => (
   <div>
@@ -54,19 +59,6 @@ const DocH4 = ({ children }) => (
 )
 
 class Guide extends React.Component {
-  state = {
-    navigationActive: false
-  }
-
-  handleIndexClick = () => {
-    if (this.state.navigationActive) {
-      bodyLocker.unlock()
-      this.setState({
-        navigationActive: false
-      })
-    }
-  }
-
   render() {
     const {
       meta = {
@@ -75,7 +67,6 @@ class Guide extends React.Component {
           'The knowledge base and documentation for how to use ZEIT Now and how it works.'
       }
     } = this.props
-    const { navigationActive } = this.state
 
     return (
       <MDXProvider
@@ -99,18 +90,88 @@ class Guide extends React.Component {
             <Wrapper>
               <H1>{meta.title}</H1>
               <P>{meta.description}</P>
+              <div className="guide-meta">
+                <GenericLink href="#authors">
+                  <AvatarGroup
+                    size={24}
+                    members={meta.authors.map(author => {
+                      return { username: author }
+                    })}
+                  />
+                </GenericLink>
+                <span className="published">
+                  {formatDate(meta.published, 'MMMM Do YYYY')}
+                </span>
+              </div>
             </Wrapper>
           </div>
 
-          <Main>
-            <div className="guide">{this.props.children}</div>
-          </Main>
+          <Wrapper>
+            <div className="guide">
+              {this.props.children}
+              <HR />
+              <div className="rate-guide">
+                <H5>How Was This Guide?</H5>
+                <Stars />
+                <FeedbackInput />
+              </div>
+              <HR />
+              <div className="guide-author" id="authors">
+                <H5>Written By</H5>
+                <div className="authors-list">
+                  {meta.authors.map(author => (
+                    <div className="author-info" key={author}>
+                      <Avatar size={32} username={author} />
+                      <span className="username">{author}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </Wrapper>
 
           <style jsx>{`
+            .guide {
+              width: 100%;
+              padding-bottom: 96px;
+              padding-top: 32px;
+            }
+
             .guide-heading {
               border-bottom: 1px solid #eaeaea;
               padding-top: 144px;
               padding-bottom: 16px;
+            }
+
+            .guide-meta {
+              margin-top: 40px;
+              display: flex;
+              align-items: center;
+            }
+
+            .guide-meta :global(.avatar-group) {
+              width: auto;
+              margin-right: 16px;
+            }
+
+            .authors-list {
+              display: flex;
+            }
+
+            .author-info {
+              display: flex;
+              align-items: center;
+              margin-right: 24px;
+              font-size: 14px;
+            }
+
+            .author-info :global(.avatar) {
+              margin-right: 8px;
+            }
+
+            .published {
+              color: #666;
+              font-size: 14px;
             }
 
             .guide-heading :global(h1) {
@@ -121,6 +182,10 @@ class Guide extends React.Component {
               font-size: 16px;
               margin-top: 8px;
               color: #444444;
+            }
+
+            .rate-guide :global(h5) {
+              margin-bottom: 24px;
             }
           `}</style>
         </Layout>
