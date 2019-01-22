@@ -2,7 +2,13 @@
   "version": 2,
   "public": true,
   "alias": "docs.zeit.sh",
-  "builds": [{ "src": "package.json", "use": "@now/static-build" }],
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@now/static-build",
+      "config": { "newPipeline": true }
+    }
+  ],
   "routes": [
     {
       "src": "/docs/router-status/(?<code>[^/]*)",

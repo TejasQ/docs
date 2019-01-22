@@ -16,8 +16,7 @@ import { P } from '~/components/text/paragraph'
 import { GenericLink } from '~/components/text/link'
 import { Avatar, AvatarGroup } from '~/components/avatar'
 import HR from '~/components/text/hr'
-import Stars from '~/components/stars'
-import FeedbackInput from '~/components/feedback-input'
+import { GuidesFeedback } from '~/components/feedback-input'
 
 const DocH2 = ({ children }) => (
   <div>
@@ -112,8 +111,7 @@ class Guide extends React.Component {
               <HR />
               <div className="rate-guide">
                 <H5>How Was This Guide?</H5>
-                <Stars />
-                <FeedbackInput />
+                <GuidesFeedback />
               </div>
               <HR />
               <div className="guide-author" id="authors">
@@ -185,7 +183,7 @@ class Guide extends React.Component {
             }
 
             .rate-guide :global(h5) {
-              margin-bottom: 24px;
+              margin-bottom: 32px;
             }
           `}</style>
         </Layout>

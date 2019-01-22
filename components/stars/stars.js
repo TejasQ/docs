@@ -1,31 +1,61 @@
 import StarIcon from '~/components/icons/star'
 
-export default () => (
+const Stars = ({ onChange, onClick }) => (
   <div className="rating-stars">
-    <form className="p2">
+    <form className="p2" onClick={onClick}>
       <fieldset className="rating-container">
         <div className="rating">
-          <input name="rating" type="radio" id="rating5" value="5" />
+          <input
+            name="rating"
+            type="radio"
+            id="rating5"
+            value="5"
+            onChange={onChange}
+          />
           <label htmlFor="rating5" title="5 stars">
             <StarIcon />
           </label>
 
-          <input name="rating" type="radio" id="rating4" value="4" />
+          <input
+            name="rating"
+            type="radio"
+            id="rating4"
+            value="4"
+            onChange={onChange}
+          />
           <label htmlFor="rating4" title="4 stars">
             <StarIcon />
           </label>
 
-          <input name="rating" type="radio" id="rating3" value="3" />
+          <input
+            name="rating"
+            type="radio"
+            id="rating3"
+            value="3"
+            onChange={onChange}
+          />
           <label htmlFor="rating3" title="3 stars">
             <StarIcon />
           </label>
 
-          <input name="rating" type="radio" id="rating2" value="2" />
+          <input
+            name="rating"
+            type="radio"
+            id="rating2"
+            value="2"
+            onChange={onChange}
+          />
           <label htmlFor="rating2" title="2 stars">
             <StarIcon />
           </label>
 
-          <input name="rating" type="radio" id="rating1" value="1" />
+          <input
+            name="rating"
+            type="radio"
+            id="rating1"
+            value="1"
+            onChange={onChange}
+          />
           <label htmlFor="rating1" title="1 stars">
             <StarIcon />
           </label>
@@ -37,6 +67,8 @@ export default () => (
         border: 0;
         padding: 0;
         margin: 0;
+        position: relative;
+        z-index: 2000;
       }
 
       .rating {
@@ -66,7 +98,7 @@ export default () => (
       .rating input:checked ~ label :global(svg),
       .rating input:checked + label :global(svg) {
         fill: #f5a623;
-        stroke: transparent;
+        stroke: #f5a623;
       }
 
       .rating input:not(:checked) + label:hover ~ input + label :global(svg),
@@ -77,3 +109,5 @@ export default () => (
     `}</style>
   </div>
 )
+
+export default Stars
