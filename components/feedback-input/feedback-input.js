@@ -26,7 +26,7 @@ class FeedbackInput extends Component {
     if (this.props.focused) {
       // textarea was hidden if we were showing an error message and
       // now we hide it
-      if (prevProps.errorMessage != null && this.props.errorMessage == null) {
+      if (prevProps.errorMessage == null && this.props.errorMessage == null) {
         this.textAreaRef.focus()
       }
 
@@ -106,7 +106,6 @@ class FeedbackInput extends Component {
             this.props.loading === true || this.props.errorMessage != null
           }
           placeholder="Enter your feedback..."
-          autoFocus
           onChange={this.props.handleValue}
         />
 
@@ -312,6 +311,7 @@ class FeedbackInput extends Component {
             pointer-events: inherit;
             z-index: 1001;
             padding: 0 8px;
+            width: 100%;
           }
 
           @keyframes appear {

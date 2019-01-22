@@ -1,10 +1,11 @@
 import StarIcon from '~/components/icons/star'
+import cn from 'classnames'
 
-const Stars = ({ onChange, onClick }) => (
+const Stars = ({ onChange, onClick, disabled }) => (
   <div className="rating-stars">
     <form className="p2" onClick={onClick}>
-      <fieldset className="rating-container">
-        <div className="rating">
+      <fieldset className="rating-container" disabled={disabled}>
+        <div className={cn('rating', { disabled })}>
           <input
             name="rating"
             type="radio"
@@ -101,8 +102,13 @@ const Stars = ({ onChange, onClick }) => (
         stroke: #f5a623;
       }
 
-      .rating input:not(:checked) + label:hover ~ input + label :global(svg),
-      .rating input:not(:checked) + label:hover :global(svg) {
+      .rating:not(.disabled)
+        input:not(:checked)
+        + label:hover
+        ~ input
+        + label
+        :global(svg),
+      .rating:not(.disabled) input:not(:checked) + label:hover :global(svg) {
         stroke: #222;
         fill: transparent;
       }

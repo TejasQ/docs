@@ -11,7 +11,8 @@ export default class GuidesFeedback extends Component {
     success: false,
     errorMessage: null,
     feedbackOpen: false,
-    rating: null
+    rating: null,
+    feeedbackSent: false
   }
 
   setError = error => {
@@ -28,6 +29,9 @@ export default class GuidesFeedback extends Component {
 
   setSuccessState = state => {
     this.setState({ success: state })
+    if (state === true) {
+      this.setState({ feedbackSent: true })
+    }
   }
 
   handleValue = event => {
@@ -99,7 +103,11 @@ export default class GuidesFeedback extends Component {
         onClick={this.handleClose}
         render={({ innerRef }) => (
           <div className="feedback" ref={innerRef}>
-            <Stars onChange={this.onRatingChange} onClick={this.handleOpen} />
+            <Stars
+              onChange={this.onRatingChange}
+              onClick={this.state.feedbackSent ? null : this.handleOpen}
+              disabled={this.state.feedbackSent}
+            />
             <FeedbackInput
               focused={this.state.feedbackOpen}
               handleClose={this.handleClose}
