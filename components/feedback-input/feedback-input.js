@@ -58,12 +58,12 @@ class FeedbackInput extends Component {
       // forget about input state
       this.textAreaRef.value = ''
 
-      // collapse in 5s
+      // collapse in 4s
       this.clearSuccessTimer = setTimeout(() => {
         if (!document.hidden) {
           this.props.setSuccessState(false)
         }
-      }, 5000)
+      }, 4000)
     } else {
       if (prevProps.success) {
         clearTimeout(this.clearSuccessTimer)
@@ -224,19 +224,20 @@ class FeedbackInput extends Component {
           .error-message,
           .success-message {
             position: absolute;
-            left: 10px;
             top: 0;
             z-index: 1001;
-            width: 230px;
+            width: 400px;
+            max-width: 90vw;
             font-size: 12px;
-            height: 130px;
+            height: 120px;
             line-height: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 20px;
+            padding: 8px;
             flex-direction: column;
+            background: white;
           }
 
           .error-message span {
