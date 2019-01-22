@@ -8,7 +8,7 @@ import Stars from '~/components/stars'
 
 export default class GuidesFeedback extends Component {
   state = {
-    success: true,
+    success: false,
     errorMessage: null,
     feedbackOpen: false,
     rating: null,
