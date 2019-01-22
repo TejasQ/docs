@@ -61,7 +61,7 @@ class FeedbackInput extends Component {
       // collapse in 5s
       this.clearSuccessTimer = setTimeout(() => {
         if (!document.hidden) {
-          this.setSuccessState(false)
+          this.props.setSuccessState(false)
         }
       }, 5000)
     } else {

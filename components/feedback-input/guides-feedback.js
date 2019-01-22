@@ -104,7 +104,7 @@ export default class GuidesFeedback extends Component {
               focused={this.state.feedbackOpen}
               handleClose={this.handeClose}
               setError={this.setError}
-              setSuccess={this.setSuccessState}
+              setSuccessState={this.setSuccessState}
               errorMessage={this.state.errorMessage}
               success={this.state.success}
               onErrorDismiss={this.onErrorDismiss}
