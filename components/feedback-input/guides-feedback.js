@@ -102,7 +102,7 @@ export default class GuidesFeedback extends Component {
             <Stars onChange={this.onRatingChange} onClick={this.handleOpen} />
             <FeedbackInput
               focused={this.state.feedbackOpen}
-              handleClose={this.handeClose}
+              handleClose={this.handleClose}
               setError={this.setError}
               setSuccessState={this.setSuccessState}
               errorMessage={this.state.errorMessage}
