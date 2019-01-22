@@ -68,7 +68,7 @@ const Stars = ({ onChange, onClick }) => (
         padding: 0;
         margin: 0;
         position: relative;
-        z-index: 2000;
+        z-index: 200;
       }
 
       .rating {

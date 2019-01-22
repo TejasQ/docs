@@ -153,7 +153,7 @@ class FeedbackInput extends Component {
           main {
             position: relative;
             width: 400px;
-            max-width: 99vw;
+            max-width: 90vw;
             height: 130px;
             display: inline-block;
           }
@@ -170,11 +170,12 @@ class FeedbackInput extends Component {
             top: -3px;
             vertical-align: top;
             width: 400px;
-            max-width: 99vw;
+            max-width: 90vw;
             height: 130px;
             transition: all 150ms ease-out;
             /* fixes a bug in ff where the animation of the chat
             * counter appears on top of our input during its transition */
+            background: transparent;
             z-index: 100;
             outline: 0;
             color: #000;
