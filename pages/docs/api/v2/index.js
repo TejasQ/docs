@@ -7,6 +7,7 @@ import { HEADER_HEIGHT } from '~/lib/constants'
 
 import * as bodyLocker from '~/lib/utils/body-locker'
 import Layout from '~/components/layout/layout'
+import Main from '~/components/layout/main'
 import changeHash from '~/lib/utils/change-hash'
 import components from '~/lib/mdx-components'
 import Content from '~/components/layout/content'
@@ -133,7 +134,7 @@ class APIPage extends Component {
 
           <DocsBuilder docs={<ApiDocs />}>
             {({ structure }) => (
-              <>
+              <Main>
                 <Sidebar
                   active={navigationActive}
                   innerRef={this.handleSidebarRef}
@@ -261,7 +262,7 @@ class APIPage extends Component {
                     )
                   })}
                 </Content>
-              </>
+              </Main>
             )}
           </DocsBuilder>
 

@@ -28,9 +28,11 @@ export default () => (
 
           <div className="actions">
             <span className="caption">Sorted by Newest</span>
-            <Button secondary small>
-              Submit a Guide
-            </Button>
+            <GenericLink href="https://github.com/zeit/docs/blob/master/contributing.md#examples">
+              <Button secondary small>
+                Submit a Guide
+              </Button>
+            </GenericLink>
           </div>
         </Wrapper>
       </div>
@@ -38,7 +40,7 @@ export default () => (
       <Wrapper>
         <div className="guide-list">
           {guides.map((guide, i) => (
-            <GenericLink href="/guides/first-guide" key={`${guide.title}.${i}`}>
+            <GenericLink href={guide.url} key={`${guide.title}.${i}`}>
               <article className="guide">
                 <div className="titles">
                   <H4>{guide.title}</H4>
@@ -59,7 +61,7 @@ export default () => (
             </GenericLink>
           ))}
 
-          <GenericLink href="#test">
+          <GenericLink href="https://github.com/zeit/docs/blob/master/contributing.md#examples">
             <article className="guide contribute">
               <div className="titles">
                 <H4>Write Your Guide →</H4>

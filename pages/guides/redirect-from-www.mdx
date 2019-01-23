@@ -1,0 +1,72 @@
+import Guide from '~/components/layout/guide'
+import { TerminalInput } from '~/components/text/terminal'
+import { InlineCode } from '~/components/text/code'
+import Caption from '~/components/text/caption'
+
+export const meta = {
+  title: 'Redirect from www. to a naked domain',
+  description:
+    'Redirect your vistors to your naked domain from the www subdomain.',
+  published: '2019-01-23T03:00:00.860Z',
+  authors: ['timothy'],
+  url: '/guides/redirect-from-www'
+}
+
+Redirecting is useful for a variety of situations, including redirecting a visitor that goes to your domain with `www.` prefixing the URL to [your domain](https://zeit.co/docs/v2/domains-and-aliases/adding-a-domain/) without that prefix.
+
+Now provides configuration to help make redirecting easier through [the `routes` property](/docs/v2/deployments/configuration#routes) within a [`now.json` file](/docs/v2/deployments/configuration).
+
+To redirect visitors from the `www.` subdomain to your naked domain, you can create a `now.json` file with the aforementioned configuration property in a new folder to deploy as a separate deployment to the one that is [aliased](/docs/v2/domains-and-aliases/aliasing-a-deployment/) to your naked domain.
+
+## Step 1: Project Setup
+
+First, create a directory for this project to live in. For example, using a Unix terminal, create the directory `redirect` and [`cd`](<https://en.wikipedia.org/wiki/Cd_(command)>) into it:
+
+<TerminalInput>mkdir redirect && cd redirect</TerminalInput>
+
+Next, create a `now.json` file in that directory with the following content:
+
+```json
+{
+  "version": 2,
+  "alias": ["www.your-domain.com"],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "status": 301,
+      "headers": { "Location": "https://your-domain.com/$1" }
+    }
+  ]
+}
+```
+
+<Caption>
+  A <InlineCode>now.json</InlineCode> configuration file that redirects all
+  paths to the naked domain.
+</Caption>
+
+### Configuration Breakdown
+
+The above configuration uses a few properties to configure the deployment:
+
+- `version`: The [version property](/docs/v2/deployments/configuration#version) specifies the Now platform version to use, in this case, we are using the [latest version 2.0](/docs/v2/platform/overview/#versioning).
+- `alias`: The [alias property](/docs/v2/deployments/configuration#alias) defines a single or set of aliases to assign the deployment to, using [the `now alias` command](/docs/v2/domains-and-aliases/aliasing-a-deployment/).
+- `routes`: The [routes property](/docs/v2/deployments/configuration#routes) allows Now to route your deployment as you intend it and configure it to be routed using a source and destination, or by way of a source, status, and headers.
+
+With this configuration, you are allowing Now to understand how to route the visitor with the `routes` property from the source, comprising of a PCRE regex capture group `/(.*)`, a [HTTP status of 301](https://en.wikipedia.org/wiki/HTTP_301) (Moved Permanently), and a `Location` header that directs to the naked domain with the captured path appended via `$1`.
+
+## Step 2: Deploying
+
+With the configuration complete and ready, you are ready to deploy. If you have not yet installed Now, you can do so by installing the [Now Desktop app](/docs/v2/getting-started/installation/#now-desktop) which installs Now CLI automatically, or by [installing Now CLI](/docs/v2/getting-started/installation/#now-cli) directly.
+
+Using Now CLI, you can deploy the project from your terminal using the following command:
+
+<TerminalInput>now</TerminalInput>
+
+Once the deployment is created, you can [alias it](https://zeit.co/docs/v2/domains-and-aliases/adding-a-domain/) to the defined alias in [the `now.json` file](#project-setup) by running:
+
+<TerminalInput>now alias</TerminalInput>
+
+Now, when visiting either the alias (www.your-domain.com) or deployment URL, the visitor will get redirected to the location set as defined by the `routes` property in the `now.json` file.
+
+export default ({ children }) => <Guide meta={meta}>{children}</Guide>

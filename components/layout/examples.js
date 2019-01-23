@@ -5,6 +5,7 @@ import Markdown from 'react-markdown'
 
 import { Code, InlineCode } from '~/components/code'
 import Layout from '~/components/layout/layout'
+import Main from '~/components/layout/main'
 import H1 from '~/components/text/h1'
 import H2 from '~/components/text/h2'
 import H3 from '~/components/text/h3'
@@ -141,83 +142,84 @@ class ExamplesPage extends React.Component {
           titlePrefix=""
           titleSuffix=" - ZEIT"
         />
-
-        <Sidebar active={navigationActive} innerRef={this.handleSidebarRef}>
-          <div className="toggle-group-wrapper">
-            <ToggleGroup>
-              <ToggleItem
-                active={
-                  router.pathname.startsWith('/docs') &&
-                  !router.pathname.startsWith('/docs/api')
-                }
-              >
-                <Link prefetch href="/docs">
-                  <a onClick={this.handleIndexClick}>Docs</a>
-                </Link>
-              </ToggleItem>
-              <ToggleItem active={router.pathname.startsWith('/docs/api')}>
-                <Link prefetch href="/docs/api">
-                  <a onClick={this.handleIndexClick}>API Reference</a>
-                </Link>
-              </ToggleItem>
-              <ToggleItem active={router.pathname.startsWith('/examples')}>
-                <Link prefetch href="/examples">
-                  <a onClick={this.handleIndexClick}>Examples</a>
-                </Link>
-              </ToggleItem>
-            </ToggleGroup>
-          </div>
-          <h5 className="platform-select-title">Now Platform Version</h5>
-          <Select defaultValue="v2" disabled={true} width="100%">
-            <option value="v1">v1</option>
-            <option value="v2">v2 (Latest)</option>
-          </Select>
-          <div className="search-bar">
-            <Input
-              className="search-input"
-              rightIcon={<SearchIcon />}
-              placeholder="Search for examples"
-              onChange={this.filterSidebar}
-            />
-          </div>
-          <DocsIndex
-            activeItem={active}
-            getHref={slugs => {
-              return {
-                href: `/examples/${slugs.section}`,
-                as: `/examples/${slugs.section}`
-              }
-            }}
-            onSectionActive={() => {}}
-            onClickLink={this.handleIndexClick}
-            structure={sidebar}
-            setInitiallyActive={() => {}}
-            updateActive={() => {}}
-          />
-        </Sidebar>
-        <Content>
-          <div className="category-wrapper">
-            <H1>{name}</H1>
-            <div className="buttons">
-              <div className="fork-button">
-                <IconExternalLink
-                  icon={<ForkIcon />}
-                  href={`https://github.com/zeit/now-examples/tree/master${fork}`}
+        <Main>
+          <Sidebar active={navigationActive} innerRef={this.handleSidebarRef}>
+            <div className="toggle-group-wrapper">
+              <ToggleGroup>
+                <ToggleItem
+                  active={
+                    router.pathname.startsWith('/docs') &&
+                    !router.pathname.startsWith('/docs/api')
+                  }
                 >
-                  Fork
-                </IconExternalLink>
-              </div>
-              <LabeledExternalLink
-                label="Live Demo"
-                href={demo}
-                icon={<ExternalLinkIcon />}
-              >
-                {demo}
-              </LabeledExternalLink>
+                  <Link prefetch href="/docs">
+                    <a onClick={this.handleIndexClick}>Docs</a>
+                  </Link>
+                </ToggleItem>
+                <ToggleItem active={router.pathname.startsWith('/docs/api')}>
+                  <Link prefetch href="/docs/api">
+                    <a onClick={this.handleIndexClick}>API Reference</a>
+                  </Link>
+                </ToggleItem>
+                <ToggleItem active={router.pathname.startsWith('/examples')}>
+                  <Link prefetch href="/examples">
+                    <a onClick={this.handleIndexClick}>Examples</a>
+                  </Link>
+                </ToggleItem>
+              </ToggleGroup>
             </div>
-            <Markdown source={content} renderers={mdxComponents} />
-          </div>
-        </Content>
+            <h5 className="platform-select-title">Now Platform Version</h5>
+            <Select defaultValue="v2" disabled={true} width="100%">
+              <option value="v1">v1</option>
+              <option value="v2">v2 (Latest)</option>
+            </Select>
+            <div className="search-bar">
+              <Input
+                className="search-input"
+                rightIcon={<SearchIcon />}
+                placeholder="Search for examples"
+                onChange={this.filterSidebar}
+              />
+            </div>
+            <DocsIndex
+              activeItem={active}
+              getHref={slugs => {
+                return {
+                  href: `/examples/${slugs.section}`,
+                  as: `/examples/${slugs.section}`
+                }
+              }}
+              onSectionActive={() => {}}
+              onClickLink={this.handleIndexClick}
+              structure={sidebar}
+              setInitiallyActive={() => {}}
+              updateActive={() => {}}
+            />
+          </Sidebar>
+          <Content>
+            <div className="category-wrapper">
+              <H1>{name}</H1>
+              <div className="buttons">
+                <div className="fork-button">
+                  <IconExternalLink
+                    icon={<ForkIcon />}
+                    href={`https://github.com/zeit/now-examples/tree/master${fork}`}
+                  >
+                    Fork
+                  </IconExternalLink>
+                </div>
+                <LabeledExternalLink
+                  label="Live Demo"
+                  href={demo}
+                  icon={<ExternalLinkIcon />}
+                >
+                  {demo}
+                </LabeledExternalLink>
+              </div>
+              <Markdown source={content} renderers={mdxComponents} />
+            </div>
+          </Content>
+        </Main>
 
         <style jsx>{`
           ul {
