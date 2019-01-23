@@ -3,7 +3,7 @@ import cn from 'classnames'
 
 const Stars = ({ onChange, onClick, disabled }) => (
   <div className="rating-stars">
-    <form className="p2" onClick={onClick}>
+    <form id="rating-form" onClick={onClick}>
       <fieldset className="rating-container" disabled={disabled}>
         <div className={cn('rating', { disabled })}>
           <input

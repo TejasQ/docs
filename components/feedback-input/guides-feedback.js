@@ -94,6 +94,10 @@ export default class GuidesFeedback extends Component {
     this.setState({
       feedbackOpen: false
     })
+
+    if (this.state.feedbackSent !== true) {
+      document.getElementById('rating-form').reset()
+    }
   }
 
   render() {
