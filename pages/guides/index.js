@@ -62,7 +62,7 @@ export default () => (
           <GenericLink href="#test">
             <article className="guide contribute">
               <div className="titles">
-                <H4>Your Guide</H4>
+                <H4>Write Your Guide →</H4>
                 <P>
                   Write about using Now in combination with a technology of your
                   choosing and get featured!
@@ -175,11 +175,9 @@ export default () => (
       }
 
       .guide.contribute :global(h4) {
-        color: #666;
       }
 
       .guide.contribute :global(p) {
-        color: #0076ff;
       }
 
       .guide.contribute .meta .avatar {

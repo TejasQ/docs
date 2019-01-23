@@ -57,7 +57,7 @@ const DocH4 = ({ children }) => (
   </div>
 )
 
-class Guide extends React.Component {
+class Guide extends React.PureComponent {
   render() {
     const {
       meta = {
