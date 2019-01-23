@@ -2,7 +2,7 @@
 
 Thank you for your interest in contributing to the ZEIT Docs!
 
-The following describes how to contribute to the ZEIT documentation, API reference, examples list, or guides site with either a code or content contribution or an issue report.
+The following describes how to contribute to the ZEIT documentation, API reference, examples list, or guides website with either code or content.
 
 #### Table of Contents
 
@@ -15,17 +15,17 @@ The following describes how to contribute to the ZEIT documentation, API referen
 
 ## Reporting Issues
 
-If you have found a bug, a spelling mistake, are missing information, or anything related to the ZEIT documentation that you feel is an issue that should be reported, please [create a new issue](https://github.com/zeit/docs/issues/new) here on GitHub. For issues relating to examples, please [create an issue on the now-examples repository](https://github.com/zeit/now-examples/issues/new).
+If you have found a bug, a spelling mistake, missing information, or anything related to the ZEIT documentation that you feel is an issue that should be reported, please [create a new issue](https://github.com/zeit/docs/issues/new) here on GitHub. For issues relating to examples, please [create an issue on the now-examples repository](https://github.com/zeit/now-examples/issues/new).
 
-When submitting an issue, please thoroughly and concisely describe the problem you are seeing so that we may easily understand and work on resolving the issue.
+When submitting an issue, please thoroughly and concisely describe the problem you are experiencing so that we may easily understand and resolve the issue in a timely manner.
 
 ## Contributing Content
 
 There are multiple sections of the ZEIT Docs, including: the main [ZEIT platform and usage documentation](https://zeit.co/docs), [ZEIT API reference](https://zeit.co/docs/api), [examples](https://zeit.co/examples), and [guides](https://zeit.co/guides).
 
-When contributing content to any of the previously mentioned sections, please fork this repository and then edit the content for the section that you want to contribute to. Please avoid submitting large pull requests containing contributions for multiple sections if the content is not related.
+When contributing content to any of the previously mentioned sections, please fork this repository and then edit the content for the section that you want to contribute to. Please avoid submitting large pull requests containing contributions for multiple sections if the content is not interrelated.
 
-You can run the documentation site locally but cloning this repository, installing the dependencies with `yarn`, then running the development server with `yarn dev`.
+You can run the documentation site locally by cloning this repository, installing the dependencies with `yarn`, and finally running the development server with `yarn dev`.
 
 ### Platform and Usage Documentation
 
@@ -33,11 +33,11 @@ The content for this section can be found in the `pages/docs` directory under ve
 
 Each `.mdx` file within the docs directory, aside from the API files, are independent pages; as [enabled by Next.js](https://nextjs.org/docs/#configuring-extensions-looked-for-when-resolving-pages-in-pages). You can edit existing files or create a new file under the section that the content belongs to.
 
-As suggested by the `.mdx` extension, the ZEIT documentation uses [MDX](https://mdxjs.com), a markdown parser mixed with JSX. This allows us to use React components within markdown to nicely render and extend our story telling and descriptive abilities.
+As suggested by the `.mdx` extension, the ZEIT documentation uses [MDX](https://mdxjs.com), a markdown parser mixed with JSX. This allows us to use React components within markdown to nicely render our content.
 
 An example of a docs MDX file:
 
-```js
+```jsx
 import Doc from '~/components/layout/docs'
 
 import { TerminalInput } from '~/components/text/terminal'
@@ -99,7 +99,7 @@ It uses the same versioning structure as `pages/docs`.
 
 We are currently focused on expanding the documentation for the Now platform 2.0 API reference which can be found in `pages/docs/api/v2`.
 
-As with the [Platform and Usage Docs](#platform-and-usage-documentation), the API uses MDX, however, each file is not an independent page but is compiled into one page but listing the file in the `lib/data/v2/api.js` file.
+As with the [Platform and Usage Docs](#platform-and-usage-documentation), the API uses MDX, although each file is not an independent page but instead is compiled into a single page, listing the file in the `lib/data/v2/api.js` file.
 
 An example API Reference MDX file: https://github.com/zeit/docs/blob/master/pages/docs/api/v2/api-docs-mdx/api-basics/rate-limits.mdx
 
